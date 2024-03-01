@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Vehycles.Data
 {
-	public class ApplicationDbContext : IdentityDbContext
+	public class VehycleDbContext : IdentityDbContext
 	{
-		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+		public VehycleDbContext(DbContextOptions<VehycleDbContext> options)
 			: base(options)
 		{
 		}
