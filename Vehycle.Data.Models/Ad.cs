@@ -4,7 +4,7 @@
 	{
         public Ad()
         {
-            Id = Guid.NewGuid();
+            this.Id = Guid.NewGuid();
         }
 
         public Guid Id { get; set; }

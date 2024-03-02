@@ -6,7 +6,9 @@
 
 		public Vehycle()
 		{
-			Id = Guid.NewGuid();
+			this.Id = Guid.NewGuid();
+
+			this.Photos = new HashSet<Photo>();
 		}
 
 		public Guid Id { get; set; }
@@ -18,8 +20,6 @@
 		public int Year { get; set; }
 
 		public string Color { get; set; } = null!;
-
-		public string Image { get; set; } = null!;
 
 		public string EuStandart { get; set; } = null!;
 
@@ -40,6 +40,8 @@
 		public int CategoryId { get; set; }
 
 		public Category Category { get; set; } = null!;
+
+		public ICollection<Photo> Photos { get; set; } = null!;
 
 	}
 }

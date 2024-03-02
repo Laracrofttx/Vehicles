@@ -5,7 +5,7 @@
 	{
         public ApplicationUser()
         {
-			Id = Guid.NewGuid();
+			this.Id = Guid.NewGuid();
 
 			this.ForumPosts = new HashSet<ForumPost>();
 			this.PostedAd = new HashSet<Ad>();
