@@ -1,14 +1,16 @@
 ﻿namespace Vehycle.Data.Models
 {
+	using System.ComponentModel.DataAnnotations;
 	public class Photo
 	{
-        public Photo()
-        {
+		public Photo()
+		{
 			this.Id = Guid.NewGuid();
 
-        }
+		}
 
-        public Guid Id {get; set;}
+		[Key]
+		public Guid Id { get; set; }
 
 		public string FileName { get; set; } = null!;
 

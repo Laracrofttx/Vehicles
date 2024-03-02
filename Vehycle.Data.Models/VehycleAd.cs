@@ -1,6 +1,6 @@
 ﻿namespace Vehycle.Data.Models
 {
-	public class VehycleAds
+	public class VehycleAd
 	{
 
         public Guid VehycleId { get; set; }

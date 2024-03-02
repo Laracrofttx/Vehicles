@@ -1,8 +1,9 @@
-﻿namespace Vehycle.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Vehycle.Data.Models
 {
 	public class Message
 	{
-
 		public string UserName { get; set; } = null!;
 
 		public string Content { get; set; } = null!;

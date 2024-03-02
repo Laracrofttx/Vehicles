@@ -1,14 +1,21 @@
 ﻿namespace Vehycle.Data.Models
 {
+	using System.ComponentModel.DataAnnotations;
+
+	using static Common.EntityValidationConstants.Category;
+
 	public class Category
 	{
-        public Category()
-        {
+		public Category()
+		{
 			this.Vehycles = new HashSet<Vehycle>();
-        }
+		}
 
-        public int Id { get; set; }
+		[Key]
+		public int Id { get; set; }
 
+		[Required]
+		[MaxLength(NameMaxLength)]
 		public string Name { get; set; } = null!;
 
 		public ICollection<Vehycle> Vehycles { get; set; } = null!;
