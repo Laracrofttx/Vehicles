@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Vehycle.Data.Models;
 using Vehycles.Data;
 
 namespace Vehycles
@@ -8,24 +10,55 @@ namespace Vehycles
 	{
 		public static void Main(string[] args)
 		{
-			var builder = WebApplication.CreateBuilder(args);
+			WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 			// Add services to the container.
-			var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-			builder.Services.AddDbContext<VehycleDbContext>(options =>
+			string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+				?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+
+			builder.Services.AddDbContext<VehyclePlatformDbContext>(options =>
 				options.UseSqlServer(connectionString));
+			
+
 			builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-			builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-				.AddEntityFrameworkStores<VehycleDbContext>();
+			builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+			{
+				options.SignIn.RequireConfirmedAccount =
+				builder.Configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
+
+				options.Password.RequireLowercase =
+				builder.Configuration.GetValue<bool>("Identity:Password:RequireLowercase");
+
+				options.Password.RequireUppercase =
+				builder.Configuration.GetValue<bool>("Identity:Password:RequireUppercase");
+
+				options.Password.RequireNonAlphanumeric =
+				builder.Configuration.GetValue<bool>("Identity:Password:RequireNonAlphanumeric");
+
+				options.Password.RequiredLength =
+				builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
+			})
+			.AddRoles<IdentityRole<Guid>>()
+			.AddEntityFrameworkStores<VehyclePlatformDbContext>();
+
+
+            builder.Services.ConfigureApplicationCookie(cfg =>
+			{
+				cfg.LoginPath = "/User/Login";
+				cfg.AccessDeniedPath = "/Home/Error/401";
+			});
+
 			builder.Services.AddControllersWithViews();
 
-			var app = builder.Build();
+			WebApplication app = builder.Build();
 
 			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())
 			{
 				app.UseMigrationsEndPoint();
+				app.UseDeveloperExceptionPage();
 			}
 			else
 			{
@@ -39,11 +72,18 @@ namespace Vehycles
 
 			app.UseRouting();
 
+			app.UseAuthentication();
 			app.UseAuthorization();
 
-			app.MapControllerRoute(
-				name: "default",
-				pattern: "{controller=Home}/{action=Index}/{id?}");
+			app.UseEndpoints(config =>
+			{
+
+
+
+			});
+
+			app.MapDefaultControllerRoute();
+				
 			app.MapRazorPages();
 
 			app.Run();
