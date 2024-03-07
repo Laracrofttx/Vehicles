@@ -5,14 +5,16 @@
 	using Microsoft.AspNetCore.Identity;
 	using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore;
-
-	using Vehycle.Data.Models;
+    using Vehycle.Data.Configurations;
+    using Vehycle.Data.Models;
 
 	public class VehyclePlatformDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 	{
-		public VehyclePlatformDbContext(DbContextOptions<VehyclePlatformDbContext> options)
+		private readonly bool seedDb;
+		public VehyclePlatformDbContext(DbContextOptions<VehyclePlatformDbContext> options, bool seedDb = true)
 			: base(options)
 		{
+			this.seedDb = seedDb;
 		}
 
 		public DbSet<About> AboutUs { get; set; }
@@ -45,11 +47,12 @@
 				.HasKey(c => new { c.VehycleId, c.AdId });
 
 
-			//Assembly configAssembly = Assembly.GetAssembly(typeof(VehyclePlatformDbContext)) ??
-			//	Assembly.GetExecutingAssembly();
-
+			if (this.seedDb)
+			{
+				builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
+				builder.ApplyConfiguration(new CategoryEntityConfiguration());
+			}
 			
-			//builder.ApplyConfigurationsFromAssembly(configAssembly);
 
 			base.OnModelCreating(builder);
 
