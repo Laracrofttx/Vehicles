@@ -11,14 +11,21 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vehycle.Common\Vehycle.Common.csproj" />
     <ProjectReference Include="..\Vehycle.Data.Models\Vehycle.Data.Models.csproj" />
     <ProjectReference Include="..\Vehycle.Data\Vehycle.Data.csproj" />
+    <ProjectReference Include="..\VehyclePlatform.Web.ViewModels\Vehycle.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\Vehycles.Services\Vehycles.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Ad\" />
   </ItemGroup>
 
 </Project>

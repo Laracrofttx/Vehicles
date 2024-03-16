@@ -1,6 +1,6 @@
 ﻿namespace Vehycle.Common
 {
-	public class EntityValidationConstants
+	public static class EntityValidationConstants
 	{
 		public static class User
 		{
@@ -24,7 +24,7 @@
 
 		}
 
-		public static class Contant
+		public static class Contact
 		{
 
 			public const int EmailAdressMinLength = 5;

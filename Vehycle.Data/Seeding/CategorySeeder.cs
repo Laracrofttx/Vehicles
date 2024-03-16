@@ -1,10 +1,10 @@
-﻿namespace Vehycle.Data.Configurations
+﻿namespace Vehycle.Data.Seeding
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Vehycle.Data.Models;
 
-    public class CategoryEntityConfiguration : IEntityTypeConfiguration<Category>
+    public class CategorySeeder : IEntityTypeConfiguration<Category>
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {

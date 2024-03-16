@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Vehycle.Data.Models;
 using Vehycles.Data;
+using Vehycles.Services;
+using Vehycles.Services.Interfaces;
 
 namespace Vehycles
 {
@@ -43,6 +45,13 @@ namespace Vehycles
 			.AddRoles<IdentityRole<Guid>>()
 			.AddEntityFrameworkStores<VehyclePlatformDbContext>();
 
+			builder.Services.AddTransient<IVehycleService,VehycleService>();
+			builder.Services.AddTransient<ICategoryService,CategoryService>();
+			builder.Services.AddTransient<ISearchService,SearchService>();
+			builder.Services.AddTransient<IUserService,UserService>();
+			builder.Services.AddTransient<IAdService,AdService>();
+
+			builder.Services.AddResponseCaching();
 
             builder.Services.ConfigureApplicationCookie(cfg =>
 			{
@@ -63,7 +72,6 @@ namespace Vehycles
 			else
 			{
 				app.UseExceptionHandler("/Home/Error");
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
 

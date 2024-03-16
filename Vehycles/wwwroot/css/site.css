@@ -18,7 +18,9 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-top: 35px;
+    margin-bottom: 60px;
+    background-color: ButtonShadow;
 }
 
 footer {
@@ -30,3 +32,4 @@ footer {
     color: black;
     text-align: center;
 }
+

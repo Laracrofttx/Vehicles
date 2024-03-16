@@ -2,7 +2,7 @@
 {
 	using System.ComponentModel.DataAnnotations;
 
-	using static Common.EntityValidationConstants.Contant;
+	using static Common.EntityValidationConstants.Contact;
 
 	public class Contact
 	{

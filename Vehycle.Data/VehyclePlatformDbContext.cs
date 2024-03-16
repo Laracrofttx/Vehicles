@@ -7,14 +7,14 @@
 	using Microsoft.EntityFrameworkCore;
     using Vehycle.Data.Configurations;
     using Vehycle.Data.Models;
+	using Vehycle.Data.Seeding;
 
 	public class VehyclePlatformDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 	{
 		private readonly bool seedDb;
-		public VehyclePlatformDbContext(DbContextOptions<VehyclePlatformDbContext> options, bool seedDb = true)
+		public VehyclePlatformDbContext(DbContextOptions<VehyclePlatformDbContext> options)
 			: base(options)
 		{
-			this.seedDb = seedDb;
 		}
 
 		public DbSet<About> AboutUs { get; set; }
@@ -43,14 +43,13 @@
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
+			
 			builder.Entity<VehycleAd>()
 				.HasKey(c => new { c.VehycleId, c.AdId });
-
 
 			if (this.seedDb)
 			{
 				builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
-				builder.ApplyConfiguration(new CategoryEntityConfiguration());
 			}
 			
 
