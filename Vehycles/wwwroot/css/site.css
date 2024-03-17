@@ -33,3 +33,10 @@ footer {
     text-align: center;
 }
 
+.logo-image img {
+    width: 140px;
+    height: 65px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+}
