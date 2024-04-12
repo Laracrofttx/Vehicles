@@ -18,6 +18,6 @@
 		[MaxLength(NameMaxLength)]
 		public string Name { get; set; } = null!;
 
-		public ICollection<Vehycle> Vehycles { get; set; } = null!;
+		public virtual ICollection<Vehycle> Vehycles { get; set; } = null!;
 	}
 }

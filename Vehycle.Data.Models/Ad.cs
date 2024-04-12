@@ -13,6 +13,6 @@
 
 		public DateTime PostedOn { get; set; }
 
-		public ApplicationUser PostedBy { get; set; } = null!;
+		public virtual ApplicationUser PostedBy { get; set; } = null!;
 	}
 }

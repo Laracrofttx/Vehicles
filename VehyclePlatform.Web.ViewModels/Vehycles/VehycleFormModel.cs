@@ -1,8 +1,10 @@
 ﻿namespace Vehycle.Web.ViewModels.Vehycles
 {
-    using System.ComponentModel.DataAnnotations;
-    using static Vehycle.Common.EntityValidationConstants.Vehycle;
+	using Microsoft.AspNetCore.Http;
+	using System.ComponentModel.DataAnnotations;
+    using Vehycle.Data.Models;
 
+    using static Vehycle.Common.EntityValidationConstants.Vehycle;
 
     public class VehycleFormModel
     {
@@ -11,6 +13,7 @@
             Id = Guid.NewGuid();
 
             Categories = new HashSet<VehycleCategoriesViewModel>();
+            Photos = new HashSet<Photo>();
         }
         public Guid Id { get; set; }
 
@@ -59,7 +62,11 @@
 
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
-
+        
         public IEnumerable<VehycleCategoriesViewModel> Categories { get; set; } = null!;
+
+        public List<IFormFile> Photo { get; set; }
+
+        public IEnumerable<Photo> Photos { get; set; } = null!;
     }
 }

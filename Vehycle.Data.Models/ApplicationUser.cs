@@ -24,9 +24,9 @@
 		[MaxLength(LastNameMaxLength)]
 		public string LastName { get; set; } = null!;
 
-		public ICollection<ForumPost> ForumPosts { get; set; }
+		public virtual ICollection<ForumPost> ForumPosts { get; set; }
 
-		public ICollection<Ad> PostedAd { get; set; }
+		public virtual ICollection<Ad> PostedAd { get; set; }
 
 	}
 }

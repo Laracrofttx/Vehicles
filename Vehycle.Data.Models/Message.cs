@@ -11,6 +11,7 @@ namespace Vehycle.Data.Models
 
         [Key]
 		public Guid Id { get; set; }
+
 		public string UserName { get; set; } = null!;
 
 		public string Content { get; set; } = null!;
@@ -19,7 +20,7 @@ namespace Vehycle.Data.Models
 
 		public string ChatId { get; set; } = null!;
 
-		public Chat Chat { get; set; } = null!;
+		public virtual Chat Chat { get; set; } = null!;
 
 	}
 }

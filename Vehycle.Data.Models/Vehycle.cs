@@ -1,7 +1,9 @@
 ﻿namespace Vehycle.Data.Models
 {
+	using Microsoft.AspNetCore.Http;
+	using Microsoft.AspNetCore.Mvc;
 	using System.ComponentModel.DataAnnotations;
-
+	using System.ComponentModel.DataAnnotations.Schema;
 	using static Common.EntityValidationConstants.Vehycle;
 	public class Vehycle
 	{
@@ -56,9 +58,11 @@
 
 		public int CategoryId { get; set; }
 
-		public Category Category { get; set; } = null!;
+		public virtual Category Category { get; set; } = null!;
 
-		public ICollection<Photo> Photos { get; set; } = null!;
+		public virtual ICollection<Photo> Photos { get; set; } = null!;
+
+		
 
 	}
 }

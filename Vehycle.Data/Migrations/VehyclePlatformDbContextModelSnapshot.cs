@@ -237,17 +237,13 @@ namespace Vehycle.Data.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .ValueGeneratedOnAdd()
                         .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)")
-                        .HasDefaultValue("John");
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .ValueGeneratedOnAdd()
                         .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)")
-                        .HasDefaultValue("Smith");
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -313,28 +309,6 @@ namespace Vehycle.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Cars"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Motorcycles"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Buses"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Trucks"
-                        });
                 });
 
             modelBuilder.Entity("Vehycle.Data.Models.Chat", b =>
@@ -443,15 +417,12 @@ namespace Vehycle.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VehycleId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("VehycleId1")
+                    b.Property<Guid>("VehycleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VehycleId1");
+                    b.HasIndex("VehycleId");
 
                     b.ToTable("Photos");
                 });
@@ -663,7 +634,7 @@ namespace Vehycle.Data.Migrations
                 {
                     b.HasOne("Vehycle.Data.Models.Vehycle", "Vehycle")
                         .WithMany("Photos")
-                        .HasForeignKey("VehycleId1")
+                        .HasForeignKey("VehycleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

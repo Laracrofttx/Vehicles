@@ -1,6 +1,9 @@
 ﻿namespace Vehycle.Data.Models
 {
+	using Microsoft.AspNetCore.Http;
 	using System.ComponentModel.DataAnnotations;
+	using System.ComponentModel.DataAnnotations.Schema;
+
 	public class Photo
 	{
 		public Photo()
@@ -14,8 +17,11 @@
 
 		public string FileName { get; set; } = null!;
 
-		public int VehycleId { get; set; }
+		[NotMapped]
+		public IFormFile File { get; set; }
 
-		public Vehycle Vehycle { get; set; } = null!;
+		public Guid VehycleId { get; set; }
+
+		public virtual Vehycle Vehycle { get; set; }
 	}
 }

@@ -1,10 +1,11 @@
 ﻿namespace Vehycles.Web.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
-    using Vehycle.Web.ViewModels.Vehycles;
-    using Vehycles.Services.Interfaces;
+	using Microsoft.AspNetCore.Mvc;
+	using Vehycle.Data.Models;
+	using Vehycle.Web.ViewModels.Vehycles;
+	using Vehycles.Services.Interfaces;
 
-    public class VehycleController : Controller
+	public class VehycleController : Controller
 	{
 		private readonly IVehycleService vehycleService;
 		private readonly ICategoryService categoryService;
@@ -49,8 +50,9 @@
 			}
 
 			return RedirectToAction("Index", "Home");
-		
+
 		}
 
+		
 	}
 }

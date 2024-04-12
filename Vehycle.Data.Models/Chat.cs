@@ -13,9 +13,9 @@ namespace Vehycle.Data.Models
         [Key]
         public int Id { get; set; }
 
-        public ICollection<Message> Messages { get; set; } = null!;
+        public virtual ICollection<Message> Messages { get; set; } = null!;
 
-		public ICollection<ApplicationUser> Users { get; set; } = null!;
+		public virtual ICollection<ApplicationUser> Users { get; set; } = null!;
 
 	}
 }

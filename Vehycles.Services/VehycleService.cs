@@ -1,15 +1,15 @@
 ﻿namespace Vehycles.Services
 {
-    using Microsoft.EntityFrameworkCore;
-    using System.Collections.Generic;
-    using Vehycle.Data.Models;
-    using Vehycle.Web.ViewModels.Vehycles;
-    using Vehycles.Data;
-    using Vehycles.Services.Interfaces;
-    public class VehycleService : IVehycleService
+	using System.Collections.Generic;
+	using Microsoft.EntityFrameworkCore;
+
+	using Vehycle.Data.Models;
+	using Vehycle.Web.ViewModels.Vehycles;
+	using Vehycles.Data;
+	using Vehycles.Services.Interfaces;
+	public class VehycleService : IVehycleService
     {
         private readonly VehyclePlatformDbContext dbContext;
-
         public VehycleService(VehyclePlatformDbContext dbContext)
         {
            this.dbContext = dbContext;
@@ -52,5 +52,9 @@
                 
             return categories;
 		}
+
 	}
+
+		
+		
 }

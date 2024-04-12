@@ -1,0 +1,23 @@
+﻿@using Vehycle.Web.ViewModels.Photos;
+
+@model UploadPhotoViewModel;
+
+
+<div class="container">
+	<form method="post" asp-controller="Photo" asp-action="Upload" enctype="multipart/form-data">
+		<div class="form-group row">
+			<label asp-for="Photos"></label>
+			<input type="file" name="photos" asp-for="Photos" multiple class="form-control custom-file-input">
+			<label class="custom-file-label">Choose File</label>
+		</div>
+		<div>
+			<button class="btn btn-outline-primary float-end mt-3" type="submit" value="upload">Upload</button>
+		</div>
+		<span class="text-success">
+			@ViewBag.Message
+		</span>
+		<div>
+			<a class="btn btn-primary float-end" asp-controller="Vehycle" asp-action="Form">Continue</a>
+		</div>
+	</form>
+</div>

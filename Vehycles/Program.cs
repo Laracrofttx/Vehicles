@@ -51,6 +51,7 @@ namespace Vehycles
 			builder.Services.AddTransient<IUserService,UserService>();
 			builder.Services.AddTransient<IAdService,AdService>();
 
+
 			builder.Services.AddResponseCaching();
 
             builder.Services.ConfigureApplicationCookie(cfg =>
