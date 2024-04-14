@@ -2,6 +2,7 @@
 {
 	using Microsoft.AspNetCore.Mvc;
 	using Vehycle.Data.Models;
+	using Vehycle.Web.ViewModels.Photos;
 	using Vehycle.Web.ViewModels.Vehycles;
 	using Vehycles.Services.Interfaces;
 
@@ -9,11 +10,13 @@
 	{
 		private readonly IVehycleService vehycleService;
 		private readonly ICategoryService categoryService;
+		private readonly IPhotoService photoService;
 
-		public VehycleController(IVehycleService vehycleService, ICategoryService categoryService)
+		public VehycleController(IVehycleService vehycleService, ICategoryService categoryService, IPhotoService photoService)
 		{
 			this.vehycleService = vehycleService;
 			this.categoryService = categoryService;
+			this.photoService = photoService;
 		}
 
 		[HttpGet]
@@ -45,10 +48,10 @@
 			catch (Exception)
 			{
 
-				throw new InvalidOperationException();
-
+				this.ModelState.AddModelError(string.Empty, "Unexepted error occured!");
+				return View(vehycle);
 			}
-
+			
 			return RedirectToAction("Index", "Home");
 
 		}

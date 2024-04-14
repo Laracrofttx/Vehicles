@@ -9,7 +9,6 @@
 		public Photo()
 		{
 			this.Id = Guid.NewGuid();
-
 		}
 
 		[Key]
@@ -17,11 +16,11 @@
 
 		public string FileName { get; set; } = null!;
 
-		[NotMapped]
-		public IFormFile File { get; set; }
+		public string FileType { get; set; } = null!;
+
+		public byte[] File { get; set; }
 
 		public Guid VehycleId { get; set; }
 
-		public virtual Vehycle Vehycle { get; set; }
 	}
 }

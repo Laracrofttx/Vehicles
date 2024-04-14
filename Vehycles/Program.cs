@@ -50,6 +50,7 @@ namespace Vehycles
 			builder.Services.AddTransient<ISearchService,SearchService>();
 			builder.Services.AddTransient<IUserService,UserService>();
 			builder.Services.AddTransient<IAdService,AdService>();
+			builder.Services.AddTransient<IPhotoService,PhotoService>();
 
 
 			builder.Services.AddResponseCaching();

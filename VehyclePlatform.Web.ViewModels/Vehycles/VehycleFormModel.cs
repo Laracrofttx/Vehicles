@@ -65,8 +65,10 @@
         
         public IEnumerable<VehycleCategoriesViewModel> Categories { get; set; } = null!;
 
-        public List<IFormFile> Photo { get; set; }
+        public List<IFormFile> Photo { get; set; } = null!;
 
         public IEnumerable<Photo> Photos { get; set; } = null!;
-    }
+
+		
+	}
 }

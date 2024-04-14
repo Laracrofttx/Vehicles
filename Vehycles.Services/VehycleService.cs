@@ -30,11 +30,13 @@
                 HorsePower = vehycles.HorsePower,
                 Transmition = vehycles.Transmition,
                 EuStandart = vehycles.EuroStrandart,
-                VehycleInfo = vehycles.VehycleInfo
-
+                VehycleInfo = vehycles.VehycleInfo,
+                VehycleType = vehycles.VehycleType,
+                CategoryId = vehycles.CategoryId
+                
             };
 
-            await this.dbContext.AddAsync(vehycle);
+            await this.dbContext.Vehycles.AddAsync(vehycle);
             await this.dbContext.SaveChangesAsync();
         }
 
