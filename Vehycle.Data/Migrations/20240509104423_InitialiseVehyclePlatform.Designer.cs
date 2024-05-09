@@ -12,8 +12,8 @@ using Vehycles.Data;
 namespace Vehycle.Data.Migrations
 {
     [DbContext(typeof(VehyclePlatformDbContext))]
-    [Migration("20240305183919_CreateVehyclePlatformDb")]
-    partial class CreateVehyclePlatformDb
+    [Migration("20240509104423_InitialiseVehyclePlatform")]
+    partial class InitialiseVehyclePlatform
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -385,11 +385,7 @@ namespace Vehycle.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ChatId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ChatId1")
+                    b.Property<int>("ChatId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -405,7 +401,7 @@ namespace Vehycle.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChatId1");
+                    b.HasIndex("ChatId");
 
                     b.ToTable("Messages");
                 });
@@ -420,15 +416,20 @@ namespace Vehycle.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VehycleId")
-                        .HasColumnType("int");
+                    b.Property<string>("FileType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("VehycleId1")
+                    b.Property<byte[]>("FormFile")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<Guid>("VehycleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VehycleId1");
+                    b.HasIndex("VehycleId");
 
                     b.ToTable("Photos");
                 });
@@ -629,7 +630,7 @@ namespace Vehycle.Data.Migrations
                 {
                     b.HasOne("Vehycle.Data.Models.Chat", "Chat")
                         .WithMany("Messages")
-                        .HasForeignKey("ChatId1")
+                        .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -639,8 +640,8 @@ namespace Vehycle.Data.Migrations
             modelBuilder.Entity("Vehycle.Data.Models.Photo", b =>
                 {
                     b.HasOne("Vehycle.Data.Models.Vehycle", "Vehycle")
-                        .WithMany("Photos")
-                        .HasForeignKey("VehycleId1")
+                        .WithMany("Images")
+                        .HasForeignKey("VehycleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -707,7 +708,7 @@ namespace Vehycle.Data.Migrations
 
             modelBuilder.Entity("Vehycle.Data.Models.Vehycle", b =>
                 {
-                    b.Navigation("Photos");
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

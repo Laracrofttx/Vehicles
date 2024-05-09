@@ -18,7 +18,7 @@ namespace Vehycle.Data.Models
 
 		public DateTime Time { get; set; }
 
-		public string ChatId { get; set; } = null!;
+		public int ChatId { get; set; } 
 
 		public virtual Chat Chat { get; set; } = null!;
 

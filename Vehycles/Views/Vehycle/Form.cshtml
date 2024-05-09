@@ -6,10 +6,11 @@
 @{
 
 	ViewData["Title"] = "My Cars";
+	ViewData["Vehycle"] = Model.Id;
 
 }
 <section>
-	<form method="post" asp-controller="Vehycle" asp-action="Form" enctype="multipart/form-data">
+	<form method="post" asp-controller="Vehycle" asp-action="Form">
 		<div class="container mt-3">
 			<div class="row">
 				<div class="col">
@@ -95,8 +96,10 @@
 					</div>
 				</div>
 			</div>
-			<button class="btn btn-outline-primary float-end mt-3" type="submit" value="Add">Upload</button>
+			<div>
+				<a class="btn btn-primary float-end" asp-controller="Photo" asp-action="Upload">Continue</a>
+			</div>
+
+			<button class="btn btn-outline-primary float-end mt-3" type="submit" value="upload">Upload</button>
 	</form>
 </section>
-
-

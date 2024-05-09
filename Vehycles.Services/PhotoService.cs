@@ -1,10 +1,16 @@
 ﻿namespace Vehycles.Services
 {
+	using System.Collections.Generic;
 	using System.IO;
+	using System.Threading.Tasks;
+	using Microsoft.AspNetCore.Http;
+	using Microsoft.AspNetCore.Mvc;
+	using Microsoft.EntityFrameworkCore;
 	using Vehycle.Data.Models;
 	using Vehycle.Web.ViewModels.Photos;
 	using Vehycles.Data;
 	using Vehycles.Services.Interfaces;
+
 	public class PhotoService : IPhotoService
 	{
 		private readonly VehyclePlatformDbContext dbContext;
@@ -15,35 +21,42 @@
 
 		}
 
-		public async Task<Photo> Save(Photo photo)
+
+		public async Task UploadImageAsync(UploadViewModel model, List<IFormFile> file)
 		{
-			await this.dbContext.Photos.AddAsync(photo);
-			await this.dbContext.SaveChangesAsync();
 
-			return photo;
-		}
-
-		public async Task UploadImageAsync(UploadPhotoViewModel photo)
-		{
-			string fileName = Path.GetFileName(photo.FileName);
-			string fileType = photo.FileType;
-
-			using (var ms = new MemoryStream())
+			
+			foreach (var photo in file)
 			{
-				var newFile = new Photo()
+
+				using (var memoryStream = new MemoryStream())
 				{
+					var vehycleId = await this.dbContext
+						.Vehycles
+						.Select(c => c.Id)
+						.FirstAsync();
 
-					Id = photo.Id,
-					FileName = fileName,
-					FileType = fileType,
-					File = photo.Photos,
+					var fileExtension = Path.GetExtension(photo.FileName);
+					var fileName = Path.GetFileName(photo.FileName);
+					var newFile = new Photo()
+					{
+						Id = model.Id,
+						FileName = fileName,
+						FileType = fileExtension,
+						FormFile = memoryStream.ToArray(),
+						VehycleId = vehycleId
 
-				};
+					};
 
-				await this.dbContext.Photos.AddAsync(newFile);
-				await this.dbContext.SaveChangesAsync();
+
+
+					await dbContext.Photos.AddAsync(newFile);
+					await dbContext.SaveChangesAsync();
+				}
+
+
 			}
 		}
-
 	}
 }
+

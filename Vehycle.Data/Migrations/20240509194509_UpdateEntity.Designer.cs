@@ -12,8 +12,8 @@ using Vehycles.Data;
 namespace Vehycle.Data.Migrations
 {
     [DbContext(typeof(VehyclePlatformDbContext))]
-    [Migration("20240414171800_Updates")]
-    partial class Updates
+    [Migration("20240509194509_UpdateEntity")]
+    partial class UpdateEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -385,11 +385,7 @@ namespace Vehycle.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ChatId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ChatId1")
+                    b.Property<int>("ChatId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -405,7 +401,7 @@ namespace Vehycle.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChatId1");
+                    b.HasIndex("ChatId");
 
                     b.ToTable("Messages");
                 });
@@ -416,10 +412,6 @@ namespace Vehycle.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("File")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -427,6 +419,10 @@ namespace Vehycle.Data.Migrations
                     b.Property<string>("FileType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("FormFile")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<Guid>("VehycleId")
                         .HasColumnType("uniqueidentifier");
@@ -505,10 +501,6 @@ namespace Vehycle.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(35)
                         .HasColumnType("nvarchar(35)");
-
-                    b.Property<byte[]>("Photos")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -638,7 +630,7 @@ namespace Vehycle.Data.Migrations
                 {
                     b.HasOne("Vehycle.Data.Models.Chat", "Chat")
                         .WithMany("Messages")
-                        .HasForeignKey("ChatId1")
+                        .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -648,9 +640,9 @@ namespace Vehycle.Data.Migrations
             modelBuilder.Entity("Vehycle.Data.Models.Photo", b =>
                 {
                     b.HasOne("Vehycle.Data.Models.Vehycle", "Vehycle")
-                        .WithMany()
+                        .WithMany("Images")
                         .HasForeignKey("VehycleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Vehycle");
@@ -712,6 +704,11 @@ namespace Vehycle.Data.Migrations
                     b.Navigation("Messages");
 
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Vehycle.Data.Models.Vehycle", b =>
+                {
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

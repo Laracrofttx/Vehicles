@@ -10,6 +10,7 @@ namespace Vehycle.Data.Models
             this.Messages = new HashSet<Message>();
             this.Users = new HashSet<ApplicationUser>();
         }
+
         [Key]
         public int Id { get; set; }
 

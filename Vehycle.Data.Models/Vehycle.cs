@@ -11,8 +11,7 @@
 		public Vehycle()
 		{
 			this.Id = Guid.NewGuid();
-
-			//this.Photos = new HashSet<Photo>();
+			this.Images = new HashSet<Photo>(); 
 		}
 
 		[Key]
@@ -60,8 +59,11 @@
 
 		public virtual Category Category { get; set; } = null!;
 
+		public virtual ICollection<Photo> Images { get; set; } = null!;
 
-		
-
+		public static implicit operator Guid(Vehycle v)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

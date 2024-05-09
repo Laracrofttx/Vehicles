@@ -47,6 +47,17 @@
 			builder.Entity<VehycleAd>()
 				.HasKey(c => new { c.VehycleId, c.AdId });
 
+			builder.Entity<Vehycle>()
+				.HasMany(v => v.Images);
+
+			builder.Entity<Photo>()
+				.HasOne(c => c.Vehycle)
+				.WithMany(c => c.Images)
+				.HasForeignKey(c => c.VehycleId)
+				.OnDelete(DeleteBehavior.Restrict);
+				
+
+			
 			if (this.seedDb)
 			{
 				builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());

@@ -9,7 +9,7 @@ namespace Vehycles.Services.Interfaces
 	public interface IPhotoService
 	{
 
-		Task UploadImageAsync(UploadPhotoViewModel photo);
+		Task UploadImageAsync(UploadViewModel model, List<IFormFile> file);
 
 	}
 }

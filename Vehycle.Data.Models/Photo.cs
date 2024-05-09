@@ -9,6 +9,7 @@
 		public Photo()
 		{
 			this.Id = Guid.NewGuid();
+			this.VehycleId = Guid.NewGuid();
 		}
 
 		[Key]
@@ -18,9 +19,12 @@
 
 		public string FileType { get; set; } = null!;
 
-		public byte[] File { get; set; }
+		public byte[] FormFile { get; set; } = null!;
 
 		public Guid VehycleId { get; set; }
+
+		public virtual Vehycle Vehycle { get; set; } = null!;
+
 
 	}
 }
