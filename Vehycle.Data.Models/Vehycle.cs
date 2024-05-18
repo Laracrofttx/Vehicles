@@ -1,9 +1,6 @@
 ﻿namespace Vehycle.Data.Models
 {
-	using Microsoft.AspNetCore.Http;
-	using Microsoft.AspNetCore.Mvc;
 	using System.ComponentModel.DataAnnotations;
-	using System.ComponentModel.DataAnnotations.Schema;
 	using static Common.EntityValidationConstants.Vehycle;
 	public class Vehycle
 	{
@@ -61,9 +58,6 @@
 
 		public virtual ICollection<Photo> Images { get; set; } = null!;
 
-		public static implicit operator Guid(Vehycle v)
-		{
-			throw new NotImplementedException();
-		}
+		
 	}
 }

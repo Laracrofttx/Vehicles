@@ -2,6 +2,7 @@
 {
 	using System.Collections.Generic;
 	using System.IO;
+	using System.Linq;
 	using System.Threading.Tasks;
 	using Microsoft.AspNetCore.Http;
 	using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@
 
 		}
 
-
+		
 		public async Task UploadImageAsync(UploadViewModel model, List<IFormFile> file)
 		{
 
@@ -31,10 +32,13 @@
 
 				using (var memoryStream = new MemoryStream())
 				{
-					var vehycleId = await this.dbContext
+
+					var lastVehycleId = await this.dbContext
 						.Vehycles
-						.Select(c => c.Id)
-						.FirstAsync();
+						.OrderByDescending(c => c.Id)
+						.FirstOrDefaultAsync();
+						
+						
 
 					var fileExtension = Path.GetExtension(photo.FileName);
 					var fileName = Path.GetFileName(photo.FileName);
@@ -44,11 +48,9 @@
 						FileName = fileName,
 						FileType = fileExtension,
 						FormFile = memoryStream.ToArray(),
-						VehycleId = vehycleId
+						VehycleId = lastVehycleId!.Id
 
 					};
-
-
 
 					await dbContext.Photos.AddAsync(newFile);
 					await dbContext.SaveChangesAsync();

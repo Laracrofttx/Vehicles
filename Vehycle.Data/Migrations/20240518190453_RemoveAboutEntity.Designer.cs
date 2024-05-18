@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vehycles.Data;
 
@@ -11,9 +12,11 @@ using Vehycles.Data;
 namespace Vehycle.Data.Migrations
 {
     [DbContext(typeof(VehyclePlatformDbContext))]
-    partial class VehyclePlatformDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240518190453_RemoveAboutEntity")]
+    partial class RemoveAboutEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

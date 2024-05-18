@@ -1,22 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Vehycle.Data.Models
+﻿namespace Vehycle.Data.Models
 {
+	using System.ComponentModel.DataAnnotations;
 	public class Chat
 	{
-        public Chat()
-        {
+		public Chat()
+		{
 
-            this.Messages = new HashSet<Message>();
-            this.Users = new HashSet<ApplicationUser>();
-        }
+			this.Messages = new HashSet<Message>();
+			this.Users = new HashSet<ApplicationUser>();
+		}
 
-        [Key]
-        public int Id { get; set; }
+		[Key]
+		public int Id { get; set; }
 
-        public virtual ICollection<Message> Messages { get; set; } = null!;
+		public ICollection<Message> Messages { get; set; } = null!;
 
-		public virtual ICollection<ApplicationUser> Users { get; set; } = null!;
+		public ICollection<ApplicationUser> Users { get; set; } = null!;
 
 	}
 }

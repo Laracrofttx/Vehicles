@@ -17,8 +17,6 @@
 		{
 		}
 
-		public DbSet<About> AboutUs { get; set; }
-
 		public DbSet<Ad> Ads { get; set; }
 
 		public DbSet<ApplicationUser> User { get; set; }

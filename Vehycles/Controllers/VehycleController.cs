@@ -54,7 +54,7 @@
 			}
 
 
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("Upload", "Photo");
 
 		}
 
