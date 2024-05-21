@@ -1,13 +1,11 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Vehycle.Data.Models;
-using Vehycles.Data;
-using Vehycles.Services;
-using Vehycles.Services.Interfaces;
-
 namespace Vehycles
 {
+	using Vehycles.Data;
+	using Vehycle.Data.Models;
+	using Vehycles.Services;
+	using Vehycles.Services.Interfaces;
+	using Microsoft.AspNetCore.Identity;
+	using Microsoft.EntityFrameworkCore;
 	public class Program
 	{
 		public static void Main(string[] args)
@@ -21,9 +19,10 @@ namespace Vehycles
 
 			builder.Services.AddDbContext<VehyclePlatformDbContext>(options =>
 				options.UseSqlServer(connectionString));
-			
+
 
 			builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 
 			builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 			{
@@ -45,17 +44,17 @@ namespace Vehycles
 			.AddRoles<IdentityRole<Guid>>()
 			.AddEntityFrameworkStores<VehyclePlatformDbContext>();
 
-			builder.Services.AddTransient<IVehycleService,VehycleService>();
-			builder.Services.AddTransient<ICategoryService,CategoryService>();
-			builder.Services.AddTransient<ISearchService,SearchService>();
-			builder.Services.AddTransient<IUserService,UserService>();
-			builder.Services.AddTransient<IAdService,AdService>();
-			builder.Services.AddTransient<IPhotoService,PhotoService>();
+			builder.Services.AddTransient<IVehycleService, VehycleService>();
+			builder.Services.AddTransient<ICategoryService, CategoryService>();
+			builder.Services.AddTransient<ISearchService, SearchService>();
+			builder.Services.AddTransient<IUserService, UserService>();
+			builder.Services.AddTransient<IAdService, AdService>();
+			builder.Services.AddTransient<IPhotoService, PhotoService>();
 
 
 			builder.Services.AddResponseCaching();
 
-            builder.Services.ConfigureApplicationCookie(cfg =>
+			builder.Services.ConfigureApplicationCookie(cfg =>
 			{
 				cfg.LoginPath = "/User/Login";
 				cfg.AccessDeniedPath = "/Home/Error/401";
@@ -93,7 +92,7 @@ namespace Vehycles
 			});
 
 			app.MapDefaultControllerRoute();
-				
+
 			app.MapRazorPages();
 
 			app.Run();
