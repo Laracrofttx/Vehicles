@@ -1,13 +1,10 @@
 ﻿namespace Vehycles.Data
 {
-	using System.Reflection;
-
 	using Microsoft.AspNetCore.Identity;
 	using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 	using Microsoft.EntityFrameworkCore;
-    using Vehycle.Data.Configurations;
-    using Vehycle.Data.Models;
-	using Vehycle.Data.Seeding;
+	using Vehycle.Data.Configurations;
+	using Vehycle.Data.Models;
 
 	public class VehyclePlatformDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 	{
@@ -16,32 +13,21 @@
 			: base(options)
 		{
 		}
-
 		public DbSet<Ad> Ads { get; set; }
-
 		public DbSet<ApplicationUser> User { get; set; }
-
 		public DbSet<Category> Categories { get; set; }
-
 		public DbSet<Chat> Chats { get; set; }
-
 		public DbSet<Contact> ContactUs { get; set; }
-
 		public DbSet<ForumPost> ForumPosts { get; set; }
-
 		public DbSet<Message> Messages { get; set; }
-
 		public DbSet<Photo> Photos { get; set; }
-
 		public DbSet<Review> Reviews { get; set; }
-
 		public DbSet<Vehycle> Vehycles { get; set; }
 
 		public DbSet<VehycleAd> VehycleAds { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
-			
 			builder.Entity<VehycleAd>()
 				.HasKey(c => new { c.VehycleId, c.AdId });
 
@@ -54,16 +40,12 @@
 				.HasForeignKey(c => c.VehycleId)
 				.OnDelete(DeleteBehavior.Restrict);
 				
-
-			
 			if (this.seedDb)
 			{
 				builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
 			}
-			
 
 			base.OnModelCreating(builder);
-
 		}
 
     }

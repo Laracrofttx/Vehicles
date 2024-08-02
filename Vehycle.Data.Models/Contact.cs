@@ -1,7 +1,6 @@
 ﻿namespace Vehycle.Data.Models
 {
 	using System.ComponentModel.DataAnnotations;
-
 	using static Common.EntityValidationConstants.Contact;
 
 	public class Contact

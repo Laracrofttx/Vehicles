@@ -1,14 +1,11 @@
 ﻿namespace Vehycles.Services
 {
 	using System.Collections.Generic;
-	using Microsoft.AspNetCore.Http;
 	using Microsoft.EntityFrameworkCore;
-	using Microsoft.Extensions.Caching.Memory;
 	using Vehycle.Data.Models;
 	using Vehycle.Web.ViewModels.Vehycles;
 	using Vehycles.Data;
 	using Vehycles.Services.Interfaces;
-	using static Vehycle.Common.GeneralApplicationConstants;
 	public class VehycleService : IVehycleService
 	{
 		private readonly VehyclePlatformDbContext dbContext;
@@ -20,7 +17,6 @@
 		{
 			var vehycle = new Vehycle
 			{
-
 				Id = vehycles.Id,
 				Brand = vehycles.Brand,
 				Model = vehycles.Model,
@@ -35,14 +31,11 @@
 				VehycleInfo = vehycles.VehycleInfo,
 				VehycleType = vehycles.VehycleType,
 				CategoryId = vehycles.CategoryId,
-				
 			};
 
 			await dbContext.Vehycles.AddAsync(vehycle);
 			await dbContext.SaveChangesAsync();
 		}
-
-
 		public async Task<IEnumerable<VehycleCategoriesViewModel>> AllVehycleCategoriesAsync()
 		{
 			var categories = await this.dbContext
@@ -57,9 +50,6 @@
 
 			return categories;
 		}
-
-
-		
 	}
 
 

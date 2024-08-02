@@ -15,7 +15,6 @@
 			this.PostedAd = new HashSet<Ad>();
         }
 
-
 		[Required]
 		[MaxLength(FirstNameMaxLength)]
         public string FirstName { get; set; } = null!;
@@ -23,10 +22,7 @@
 		[Required]
 		[MaxLength(LastNameMaxLength)]
 		public string LastName { get; set; } = null!;
-
 		public virtual ICollection<ForumPost> ForumPosts { get; set; }
-
 		public virtual ICollection<Ad> PostedAd { get; set; }
-
 	}
 }

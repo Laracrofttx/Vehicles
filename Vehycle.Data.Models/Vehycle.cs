@@ -4,7 +4,6 @@
 	using static Common.EntityValidationConstants.Vehycle;
 	public class Vehycle
 	{
-
 		public Vehycle()
 		{
 			this.Id = Guid.NewGuid();
@@ -51,13 +50,8 @@
 
 		[Required]
 		public string Condition { get; set; } = null!;
-
 		public int CategoryId { get; set; }
-
 		public virtual Category Category { get; set; } = null!;
-
 		public virtual ICollection<Photo> Images { get; set; } = null!;
-
-		
 	}
 }

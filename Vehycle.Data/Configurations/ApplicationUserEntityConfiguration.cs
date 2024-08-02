@@ -5,7 +5,6 @@
 	using Vehycle.Data.Models;
 	public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>
 	{
-
 		public void Configure(EntityTypeBuilder<ApplicationUser> builder)
 		{
 			builder
@@ -16,7 +15,6 @@
 				.Property(l => l.LastName)
 				.HasDefaultValue("Smith");
 		}
-
 	}
 }
 
