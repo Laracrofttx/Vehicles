@@ -9,12 +9,10 @@
 	{
 		private readonly IVehycleService vehycleService;
 		private readonly ICategoryService categoryService;
-		private readonly IPhotoService photoService;
-		public VehycleController(IVehycleService vehycleService, ICategoryService categoryService, IPhotoService photoService, VehyclePlatformDbContext dbContext)
+		public VehycleController(IVehycleService vehycleService, ICategoryService categoryService)
 		{
 			this.vehycleService = vehycleService;
 			this.categoryService = categoryService;
-			this.photoService = photoService;
 		}
 
 		[HttpGet]
@@ -45,6 +43,27 @@
 				return View(vehycle);
 			}
 			return RedirectToAction("Upload", "Photo");
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Upload(UploadViewModel model, List<IFormFile> file)
+		{
+			if (!ModelState.IsValid)
+			{
+				this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
+			}
+
+			try
+			{
+				await this.vehycleService.UploadImageAsync(model, file);
+
+			}
+			catch (Exception)
+			{
+				this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
+				return View(model);
+			}
+			return RedirectToAction("Index", "Home");
 		}
 	}
 }

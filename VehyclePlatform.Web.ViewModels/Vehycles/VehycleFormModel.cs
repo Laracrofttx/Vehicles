@@ -1,6 +1,7 @@
 ﻿namespace Vehycle.Web.ViewModels.Vehycles
 {
 	using Microsoft.AspNetCore.Http;
+	using Microsoft.AspNetCore.Mvc;
 	using System.ComponentModel.DataAnnotations;
     using Vehycle.Data.Models;
 
@@ -65,5 +66,11 @@
         public IEnumerable<VehycleCategoriesViewModel> Categories { get; set; }
         public List<IFormFile> Photo { get; set; }
         public IEnumerable<Photo> Photos { get; set; }
+		public string FileName { get; set; } = null!;
+		public string FileType { get; set; } = null!;
+
+		[BindProperty]
+		public List<IFormFile> FormFile { get; set; } = null!;
+		public Guid VehycleId { get; set; }
 	}
 }
