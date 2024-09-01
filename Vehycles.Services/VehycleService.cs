@@ -14,7 +14,7 @@
 		{
 			this.dbContext = dbContext;
 		}
-		public async Task AddVehycleAsync(VehycleFormModel vehycles)
+		public async Task AddVehycleAsync(VehycleFormModel vehycles, List<IFormFile> file)
 		{
 			var vehycle = new Vehycle
 			{
@@ -33,7 +33,31 @@
 				VehycleType = vehycles.VehycleType,
 				CategoryId = vehycles.CategoryId,
 			};
-			await dbContext.Vehycles.AddAsync(vehycle);
+
+            foreach (var photo in file)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    var lastVehycleId = await this.dbContext
+                        .Vehycles
+                        .OrderByDescending(c => c.Id)
+                        .FirstOrDefaultAsync();
+
+                    var fileExtension = Path.GetExtension(photo.FileName);
+                    var fileName = Path.GetFileName(photo.FileName);
+                    var newFile = new Photo()
+                    {
+                        Id = vehycles.Id,
+                        FileName = fileName,
+                        FileType = fileExtension,
+                        FormFile = memoryStream.ToArray(),
+                        VehycleId = lastVehycleId!.Id
+                    };
+                    await dbContext.Photos.AddAsync(newFile);
+                    await dbContext.SaveChangesAsync();
+                }
+            }
+            await dbContext.Vehycles.AddAsync(vehycle);
 			await dbContext.SaveChangesAsync();
 		}
 		public async Task<IEnumerable<VehycleCategoriesViewModel>> AllVehycleCategoriesAsync()
@@ -50,31 +74,31 @@
 
 			return categories;
 		}
-		public async Task UploadImageAsync(VehycleFormModel model, List<IFormFile> file)
-		{
-			foreach (var photo in file)
-			{
-				using (var memoryStream = new MemoryStream())
-				{
-					var lastVehycleId = await this.dbContext
-						.Vehycles
-						.OrderByDescending(c => c.Id)
-						.FirstOrDefaultAsync();
+		//public async Task UploadImageAsync(VehycleFormModel model, List<IFormFile> file)
+		//{
+		//	foreach (var photo in file)
+		//	{
+		//		using (var memoryStream = new MemoryStream())
+		//		{
+		//			var lastVehycleId = await this.dbContext
+		//				.Vehycles
+		//				.OrderByDescending(c => c.Id)
+		//				.FirstOrDefaultAsync();
 
-					var fileExtension = Path.GetExtension(photo.FileName);
-					var fileName = Path.GetFileName(photo.FileName);
-					var newFile = new Photo()
-					{
-						Id = model.Id,
-						FileName = fileName,
-						FileType = fileExtension,
-						FormFile = memoryStream.ToArray(),
-						VehycleId = lastVehycleId!.Id
-					};
-					await dbContext.Photos.AddAsync(newFile);
-					await dbContext.SaveChangesAsync();
-				}
-			}
-		}
+		//			var fileExtension = Path.GetExtension(photo.FileName);
+		//			var fileName = Path.GetFileName(photo.FileName);
+		//			var newFile = new Photo()
+		//			{
+		//				Id = model.Id,
+		//				FileName = fileName,
+		//				FileType = fileExtension,
+		//				FormFile = memoryStream.ToArray(),
+		//				VehycleId = lastVehycleId!.Id
+		//			};
+		//			await dbContext.Photos.AddAsync(newFile);
+		//			await dbContext.SaveChangesAsync();
+		//		}
+		//	}
+		//}
 	}
 }

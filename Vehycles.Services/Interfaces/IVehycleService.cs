@@ -6,8 +6,8 @@ namespace Vehycles.Services.Interfaces
 {
     public interface IVehycleService
     {
-		Task AddVehycleAsync(VehycleFormModel vehycle);
+		Task AddVehycleAsync(VehycleFormModel vehycle, List<IFormFile> imgs);
 		Task<IEnumerable<VehycleCategoriesViewModel>> AllVehycleCategoriesAsync();
-		Task UploadImageAsync(VehycleFormModel model, List<IFormFile> file);
+		//Task UploadImageAsync(VehycleFormModel model, List<IFormFile> file);
 	}
 }

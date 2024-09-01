@@ -24,7 +24,7 @@
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Form(VehycleFormModel vehycle)
+		public async Task<IActionResult> Form(VehycleFormModel vehycle, List<IFormFile> imgs)
 		{
 			if (!await this.categoryService.CategoryExistByIdAsync(vehycle.CategoryId))
 			{
@@ -33,7 +33,7 @@
 
 			try
 			{
-				await this.vehycleService.AddVehycleAsync(vehycle);
+				await this.vehycleService.AddVehycleAsync(vehycle, imgs);
 
 			}
 			catch (Exception)
@@ -41,28 +41,28 @@
 				this.ModelState.AddModelError(string.Empty, "Unexepted error occured!");
 				return View(vehycle);
 			}
-			return RedirectToAction("Upload", "Photo");
-		}
-
-		[HttpPost]
-		public async Task<IActionResult> Upload(VehycleFormModel model, List<IFormFile> file)
-		{
-			if (!ModelState.IsValid)
-			{
-				this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
-			}
-
-			try
-			{
-				await this.vehycleService.UploadImageAsync(model, file);
-
-			}
-			catch (Exception)
-			{
-				this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
-				return View(model);
-			}
 			return RedirectToAction("Index", "Home");
 		}
+
+		//[HttpPost]
+		//public async Task<IActionResult> Upload(VehycleFormModel img, List<IFormFile> file)
+		//{
+		//	if (!ModelState.IsValid)
+		//	{
+		//		this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
+		//	}
+
+		//	try
+		//	{
+		//		await this.vehycleService.UploadImageAsync(img, file);
+
+		//	}
+		//	catch (Exception)
+		//	{
+		//		this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
+		//		return View(img);
+		//	}
+		//	return RedirectToAction("Index", "Home");
+		//}
 	}
 }
