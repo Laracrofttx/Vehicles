@@ -1,7 +1,6 @@
 ﻿namespace Vehycle.Data.Models
 {
 	using System.ComponentModel.DataAnnotations;
-
 	public class Photo
 	{
 		public Photo()

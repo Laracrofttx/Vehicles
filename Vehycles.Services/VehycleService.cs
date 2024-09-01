@@ -32,7 +32,6 @@
 				VehycleType = vehycles.VehycleType,
 				CategoryId = vehycles.CategoryId,
 			};
-
 			await dbContext.Vehycles.AddAsync(vehycle);
 			await dbContext.SaveChangesAsync();
 		}
@@ -51,7 +50,4 @@
 			return categories;
 		}
 	}
-
-
-
 }

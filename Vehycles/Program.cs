@@ -16,13 +16,10 @@ namespace Vehycles
 			string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
 				?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-
 			builder.Services.AddDbContext<VehyclePlatformDbContext>(options =>
 				options.UseSqlServer(connectionString));
 
-
 			builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
 
 			builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 			{
@@ -51,9 +48,7 @@ namespace Vehycles
 			builder.Services.AddTransient<IAdService, AdService>();
 			builder.Services.AddTransient<IPhotoService, PhotoService>();
 
-
 			builder.Services.AddResponseCaching();
-
 			builder.Services.ConfigureApplicationCookie(cfg =>
 			{
 				cfg.LoginPath = "/User/Login";

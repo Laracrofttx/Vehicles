@@ -12,11 +12,9 @@
 
 		[Key]
 		public Guid Id { get; set; }
-
 		[Required]
 		[MaxLength(ThemeMaxLength)]
 		public string Theme { get; set; } = null!;
-
 		[Required]
 		[MaxLength(ContentMaxLength)]
 		public string Content { get; set; } = null!;

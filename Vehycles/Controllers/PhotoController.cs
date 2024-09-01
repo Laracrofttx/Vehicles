@@ -1,13 +1,9 @@
 ﻿namespace Vehycles.Web.Controllers
 {
 	using Microsoft.AspNetCore.Mvc;
-	using Vehycle.Data.Models;
 	using Vehycle.Web.ViewModels.Photos;
-	using Vehycle.Web.ViewModels.Vehycles;
 	using Vehycles.Data;
 	using Vehycles.Services.Interfaces;
-	using static Vehycle.Common.EntityValidationConstants;
-
 	public class PhotoController : Controller
 	{
 		private readonly IPhotoService photoService;
@@ -57,13 +53,9 @@
 
 		//	return View();
 		//}
-
-
-
 		[HttpPost]
 		public async Task<IActionResult> Upload(UploadViewModel model, List<IFormFile> file)
 		{
-
 			if (!ModelState.IsValid)
 			{
 				this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
@@ -76,19 +68,12 @@
 			}
 			catch (Exception)
 			{
-
 				this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
 				return View(model);
 			}
-
 			return RedirectToAction("Index", "Home");
-
 		}
-
-
-
 	}
-
 }
 
 

@@ -14,7 +14,6 @@
 	public class PhotoService : IPhotoService
 	{
 		private readonly VehyclePlatformDbContext dbContext;
-
 		public PhotoService(VehyclePlatformDbContext dbContext)
 		{
 			this.dbContext = dbContext;
