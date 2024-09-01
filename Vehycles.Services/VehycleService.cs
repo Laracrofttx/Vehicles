@@ -4,7 +4,6 @@
 	using Microsoft.AspNetCore.Http;
 	using Microsoft.EntityFrameworkCore;
 	using Vehycle.Data.Models;
-	using Vehycle.Web.ViewModels.Photos;
 	using Vehycle.Web.ViewModels.Vehycles;
 	using Vehycles.Data;
 	using Vehycles.Services.Interfaces;
@@ -51,7 +50,7 @@
 
 			return categories;
 		}
-		public async Task UploadImageAsync(UploadViewModel model, List<IFormFile> file)
+		public async Task UploadImageAsync(VehycleFormModel model, List<IFormFile> file)
 		{
 			foreach (var photo in file)
 			{

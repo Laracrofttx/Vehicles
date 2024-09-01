@@ -6,7 +6,7 @@
 	using Vehycle.Data.Configurations;
 	using Vehycle.Data.Models;
 
-	public class VehyclePlatformDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
+	public class VehyclePlatformDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
 	{
 		private readonly bool seedDb;
 		public VehyclePlatformDbContext(DbContextOptions<VehyclePlatformDbContext> options)
@@ -14,7 +14,6 @@
 		{
 		}
 		public DbSet<Ad> Ads { get; set; }
-		public DbSet<ApplicationUser> User { get; set; }
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<Chat> Chats { get; set; }
 		public DbSet<Contact> ContactUs { get; set; }
@@ -23,7 +22,6 @@
 		public DbSet<Photo> Photos { get; set; }
 		public DbSet<Review> Reviews { get; set; }
 		public DbSet<Vehycle> Vehycles { get; set; }
-
 		public DbSet<VehycleAd> VehycleAds { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)

@@ -1,13 +1,10 @@
 ﻿@using Vehycle.Web.ViewModels;
 @using Vehycle.Web.ViewModels.Vehycles;
-
 @model VehycleFormModel
 
 @{
-
 	ViewData["Title"] = "My Cars";
 	ViewData["Vehycle"] = Model.Id;
-
 }
 <section>
 	<form method="post" asp-controller="Vehycle" asp-action="Form">
@@ -96,28 +93,13 @@
 					</div>
 				</div>
 			</div>
-			<div>
-				<a class="btn btn-primary float-end" asp-controller="Photo" asp-action="Upload">Continue</a>
-			</div>
-
-			<button class="btn btn-outline-primary float-end mt-3" type="submit" value="upload">Upload</button>
-	</form>
-	<div class="container">
-		<form method="post" asp-controller="Photo" asp-action="Upload" enctype="multipart/form-data">
-			<div class="form-group">
-				<label asp-for="FormFile"></label>
+			<div class="container mt-3">
 				<input type="file" name="file" id="file" asp-for="FormFile" multiple class="form-control custom-file-input">
 				<label class="custom-file-label">Choose File</label>
+				<span class="text-success">
+					@ViewBag.Message
+				</span>
 			</div>
-			<div>
-				<button class="btn btn-outline-primary float-end mt-3" type="submit" value="upload">
-					Upload
-				</button>
-			</div>
-			<span class="text-success">
-				@ViewBag.Message
-			</span>
-		</form>
-
-	</div>
+			<button class="btn btn-outline-primary float-end mt-3" type="submit" value="upload">Upload</button>
+	</form>
 </section>

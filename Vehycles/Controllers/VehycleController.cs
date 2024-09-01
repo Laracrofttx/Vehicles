@@ -1,7 +1,6 @@
 ﻿namespace Vehycles.Web.Controllers
 {
 	using Microsoft.AspNetCore.Mvc;
-	using Vehycle.Web.ViewModels.Photos;
 	using Vehycle.Web.ViewModels.Vehycles;
 	using Vehycles.Data;
 	using Vehycles.Services.Interfaces;
@@ -46,7 +45,7 @@
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Upload(UploadViewModel model, List<IFormFile> file)
+		public async Task<IActionResult> Upload(VehycleFormModel model, List<IFormFile> file)
 		{
 			if (!ModelState.IsValid)
 			{

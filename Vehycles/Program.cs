@@ -21,32 +21,24 @@ namespace Vehycles
 
 			builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-			builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+			builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 			{
-				options.SignIn.RequireConfirmedAccount =
-				builder.Configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
-
-				options.Password.RequireLowercase =
-				builder.Configuration.GetValue<bool>("Identity:Password:RequireLowercase");
-
-				options.Password.RequireUppercase =
-				builder.Configuration.GetValue<bool>("Identity:Password:RequireUppercase");
-
-				options.Password.RequireNonAlphanumeric =
-				builder.Configuration.GetValue<bool>("Identity:Password:RequireNonAlphanumeric");
-
-				options.Password.RequiredLength =
-				builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
-			})
-			.AddRoles<IdentityRole<Guid>>()
-			.AddEntityFrameworkStores<VehyclePlatformDbContext>();
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.SignIn.RequireConfirmedAccount = false;
+            })
+			.AddEntityFrameworkStores<VehyclePlatformDbContext>()
+			.AddDefaultTokenProviders()
+			.AddRoles<ApplicationRole>();
 
 			builder.Services.AddTransient<IVehycleService, VehycleService>();
 			builder.Services.AddTransient<ICategoryService, CategoryService>();
 			builder.Services.AddTransient<ISearchService, SearchService>();
 			builder.Services.AddTransient<IUserService, UserService>();
 			builder.Services.AddTransient<IAdService, AdService>();
-			builder.Services.AddTransient<IPhotoService, PhotoService>();
 
 			builder.Services.AddResponseCaching();
 			builder.Services.ConfigureApplicationCookie(cfg =>

@@ -1,11 +1,9 @@
 ﻿namespace Vehycle.Data.Models
 {
-	using Microsoft.AspNetCore.Identity;
-	using System.ComponentModel.DataAnnotations;
+    using global::Vehycle.Data.Models.Common;
+    using Microsoft.AspNetCore.Identity;
 
-	using static Common.EntityValidationConstants.User;
-
-	public class ApplicationUser : IdentityUser<Guid>
+    public class ApplicationUser : IdentityUser<Guid>, IAuditable
 	{
         public ApplicationUser()
         {
@@ -15,14 +13,17 @@
 			this.PostedAd = new HashSet<Ad>();
         }
 
-		[Required]
-		[MaxLength(FirstNameMaxLength)]
-        public string FirstName { get; set; } = null!;
-
-		[Required]
-		[MaxLength(LastNameMaxLength)]
-		public string LastName { get; set; } = null!;
-		public virtual ICollection<ForumPost> ForumPosts { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Img { get; set; }
+        public int Age { get; set; }
+        public string Gender { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime? DeletedOn { get; set; }
+        public virtual ICollection<ForumPost> ForumPosts { get; set; }
 		public virtual ICollection<Ad> PostedAd { get; set; }
 	}
 }

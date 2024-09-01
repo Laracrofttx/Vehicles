@@ -1,7 +1,6 @@
 ﻿namespace Vehycle.Data.Models
 {
 	using System.ComponentModel.DataAnnotations;
-	using static Common.EntityValidationConstants.Vehycle;
 	public class Vehycle
 	{
 		public Vehycle()
@@ -13,10 +12,8 @@
 		[Key]
 		public Guid Id { get; set; }
 		[Required]
-		[MaxLength(BrandNameMaxLength)]
 		public string Brand { get; set; } = null!;
 		[Required]
-		[MaxLength(ModelNameMaxLength)]
 		public string Model { get; set; } = null!;
 		[Required]
 		public int Year { get; set; }
