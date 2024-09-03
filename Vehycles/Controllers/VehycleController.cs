@@ -8,12 +8,10 @@
 	{
 		private readonly IVehycleService vehycleService;
 		private readonly ICategoryService categoryService;
-		private readonly IPhotoService photoService;
-		public VehycleController(IVehycleService vehycleService, ICategoryService categoryService, IPhotoService photoService)
+		public VehycleController(IVehycleService vehycleService, ICategoryService categoryService)
 		{
 			this.vehycleService = vehycleService;
 			this.categoryService = categoryService;
-			this.photoService = photoService;
 		}
 
 		[HttpGet]
@@ -26,7 +24,7 @@
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Form(VehycleFormModel vehycle, List<IFormFile> imgs)
+		public async Task<IActionResult> Form(VehycleFormModel vehycle)
 		{
 			if (!await this.categoryService.CategoryExistByIdAsync(vehycle.CategoryId))
 			{
@@ -35,7 +33,7 @@
 
 			try
 			{
-				await this.vehycleService.AddVehycleAsync(vehycle, imgs);
+				await this.vehycleService.AddVehycleAsync(vehycle);
 
 			}
 			catch (Exception)
@@ -43,28 +41,7 @@
 				this.ModelState.AddModelError(string.Empty, "Unexepted error occured!");
 				return View(vehycle);
 			}
-			return RedirectToAction("Upload", "Vehycle");
-		}
-
-		[HttpPost]
-		public async Task<IActionResult> Upload(VehycleFormModel img, List<IFormFile> file)
-		{
-			if (!ModelState.IsValid)
-			{
-				this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
-			}
-
-			try
-			{
-				await this.photoService.UploadImageAsync(img, file);
-
-			}
-			catch (Exception)
-			{
-				this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
-				return View(img);
-			}
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("Upload", "Photo");
 		}
 	}
 }

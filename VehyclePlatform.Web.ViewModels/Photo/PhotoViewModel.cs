@@ -5,11 +5,11 @@ namespace Vehycle.Web.ViewModels.Photo
 {
 	public class PhotoViewModel
 	{
-		public string FileName { get; set; } = null!;
-		public string FileType { get; set; } = null!;
+		public string FileName { get; set; } 
+		public string FileType { get; set; } 
 
 		[BindProperty]
-		public List<IFormFile> FormFile { get; set; } = null!;
+		public List<IFormFile> FormFile { get; set; } 
 		public Guid VehycleId { get; set; }
 	}
 }
