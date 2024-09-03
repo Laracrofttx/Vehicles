@@ -8,10 +8,12 @@
 	{
 		private readonly IVehycleService vehycleService;
 		private readonly ICategoryService categoryService;
-		public VehycleController(IVehycleService vehycleService, ICategoryService categoryService)
+		private readonly IPhotoService photoService;
+		public VehycleController(IVehycleService vehycleService, ICategoryService categoryService, IPhotoService photoService)
 		{
 			this.vehycleService = vehycleService;
 			this.categoryService = categoryService;
+			this.photoService = photoService;
 		}
 
 		[HttpGet]
@@ -41,28 +43,28 @@
 				this.ModelState.AddModelError(string.Empty, "Unexepted error occured!");
 				return View(vehycle);
 			}
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("Upload", "Vehycle");
 		}
 
-		//[HttpPost]
-		//public async Task<IActionResult> Upload(VehycleFormModel img, List<IFormFile> file)
-		//{
-		//	if (!ModelState.IsValid)
-		//	{
-		//		this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
-		//	}
+		[HttpPost]
+		public async Task<IActionResult> Upload(VehycleFormModel img, List<IFormFile> file)
+		{
+			if (!ModelState.IsValid)
+			{
+				this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
+			}
 
-		//	try
-		//	{
-		//		await this.vehycleService.UploadImageAsync(img, file);
+			try
+			{
+				await this.photoService.UploadImageAsync(img, file);
 
-		//	}
-		//	catch (Exception)
-		//	{
-		//		this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
-		//		return View(img);
-		//	}
-		//	return RedirectToAction("Index", "Home");
-		//}
+			}
+			catch (Exception)
+			{
+				this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
+				return View(img);
+			}
+			return RedirectToAction("Index", "Home");
+		}
 	}
 }

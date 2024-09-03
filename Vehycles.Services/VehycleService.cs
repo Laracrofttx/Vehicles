@@ -74,31 +74,5 @@
 
 			return categories;
 		}
-		//public async Task UploadImageAsync(VehycleFormModel model, List<IFormFile> file)
-		//{
-		//	foreach (var photo in file)
-		//	{
-		//		using (var memoryStream = new MemoryStream())
-		//		{
-		//			var lastVehycleId = await this.dbContext
-		//				.Vehycles
-		//				.OrderByDescending(c => c.Id)
-		//				.FirstOrDefaultAsync();
-
-		//			var fileExtension = Path.GetExtension(photo.FileName);
-		//			var fileName = Path.GetFileName(photo.FileName);
-		//			var newFile = new Photo()
-		//			{
-		//				Id = model.Id,
-		//				FileName = fileName,
-		//				FileType = fileExtension,
-		//				FormFile = memoryStream.ToArray(),
-		//				VehycleId = lastVehycleId!.Id
-		//			};
-		//			await dbContext.Photos.AddAsync(newFile);
-		//			await dbContext.SaveChangesAsync();
-		//		}
-		//	}
-		//}
 	}
 }

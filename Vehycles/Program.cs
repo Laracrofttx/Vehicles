@@ -38,6 +38,7 @@ namespace Vehycles
             builder.Services.AddScoped<IVehycleService, VehycleService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<ISearchService, SearchService>();
+            builder.Services.AddScoped<IPhotoService, PhotoService>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IAdService, AdService>();
 

@@ -66,11 +66,5 @@
         public IEnumerable<VehycleCategoriesViewModel> Categories { get; set; }
         public List<IFormFile> Photo { get; set; }
         public IEnumerable<Photo> Photos { get; set; }
-		public string FileName { get; set; } = null!;
-		public string FileType { get; set; } = null!;
-
-		[BindProperty]
-		public List<IFormFile> FormFile { get; set; } = null!;
-		public Guid VehycleId { get; set; }
 	}
 }
