@@ -24,7 +24,6 @@ namespace Vehycles.Web.Controllers
 			{
 				this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
 			}
-
 			try
 			{
 				await this.photoService.UploadImageAsync(model, file);
