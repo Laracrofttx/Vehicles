@@ -64,13 +64,7 @@
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public IEnumerable<VehycleCategoriesViewModel> Categories { get; set; }
-        public List<IFormFile> Photo { get; set; }
-        public IEnumerable<Photo> Photos { get; set; }
-		public string FileName { get; set; }
-		public string FileType { get; set; }
-
-		[BindProperty]
-		public List<IFormFile> FormFile { get; set; }
-		public Guid VehycleId { get; set; }
+        public List<IFormFile> Photo { get; set; } = null!;
+        public IEnumerable<Photo> Photos { get; set; } = null!;
 	}
 }

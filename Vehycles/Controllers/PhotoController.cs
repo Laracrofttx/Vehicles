@@ -18,7 +18,7 @@ namespace Vehycles.Web.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Upload(VehycleFormModel img, List<IFormFile> file)
+		public async Task<IActionResult> Upload(PhotoViewModel model, List<IFormFile> file)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -27,15 +27,15 @@ namespace Vehycles.Web.Controllers
 
 			try
 			{
-				await this.photoService.UploadImageAsync(img, file);
+				await this.photoService.UploadImageAsync(model, file);
 
 			}
 			catch (Exception)
 			{
 				this.ModelState.AddModelError(string.Empty, "Unexpected error occured!");
-				return View(img);
+				return View(file);
 			}
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("Form", "Vehycle");
 		}
 	}
 }

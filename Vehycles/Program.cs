@@ -53,8 +53,6 @@ namespace Vehycles
 
             WebApplication app = builder.Build();
 
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -68,11 +66,13 @@ namespace Vehycles
                 app.UseHsts();
             }
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.MapDefaultControllerRoute();
             app.Run();
         }

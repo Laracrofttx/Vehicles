@@ -2,10 +2,9 @@
 {
 	using Microsoft.AspNetCore.Http;
 	using Vehycle.Web.ViewModels.Photo;
-	using Vehycle.Web.ViewModels.Vehycles;
 
 	public interface IPhotoService
 	{
-		Task UploadImageAsync(VehycleFormModel model, List<IFormFile> file);
+		Task UploadImageAsync(PhotoViewModel model, List<IFormFile> file);
 	}
 }

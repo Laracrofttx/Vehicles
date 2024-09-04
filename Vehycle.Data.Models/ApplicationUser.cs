@@ -13,11 +13,11 @@
 			this.PostedAd = new HashSet<Ad>();
         }
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Img { get; set; }
-        public int Age { get; set; }
-        public string Gender { get; set; }
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
+        public string Img { get; set; } = null!;
+        public int Age { get; set; } 
+        public string Gender { get; set; } = null!;
         public DateTime DateOfBirth { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime? ModifiedOn { get; set; }

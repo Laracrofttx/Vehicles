@@ -2,9 +2,9 @@
 
 @model PhotoViewModel
 
-
+<section>
 <div class="container mt-3">
-	<form method="post" asp-controller="Photo" asp-action="Upload">
+		<form method="post" asp-controller="Photo" asp-action="Upload" enctype="multipart/form-data">
 		<input type="file" name="file" id="file" asp-for="FormFile" multiple class="form-control custom-file-input">
 		<label class="custom-file-label">Choose File</label>
 		<span class="text-success">
@@ -13,3 +13,4 @@
 		<button class="btn btn-outline-primary float-end mt-3" type="submit" value="upload">Upload</button>
 	</form>
 </div>
+</section>
