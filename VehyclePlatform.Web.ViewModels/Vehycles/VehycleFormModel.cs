@@ -20,32 +20,32 @@
 
         [Required]
         [StringLength(BrandNameMaxLength, MinimumLength = BrandNameMinLength, ErrorMessage = "The field must contain atleast {2} symbols")]
-        public string Brand { get; set; } = null!;
+        public string Brand { get; set; }
 
         [Required]
         [StringLength(ModelNameMaxLength, MinimumLength = ModelNameMinLength, ErrorMessage = "The field must contain atleast {2} symbols")]
-        public string Model { get; set; } = null!;
+        public string Model { get; set; }
 
         [Required]
         public int Year { get; set; }
 
         [Required]
-        public string Color { get; set; } = null!;
+        public string Color { get; set; }
 
         [Required]
         public decimal Price { get; set; }
 
         [Required]
         [Display(Name = "Type")]
-        public string VehycleType { get; set; } = null!;
+        public string VehycleType { get; set; } 
 
         [Required]
         [Display(Name = "Details")]
         [StringLength(VehycleInfoMaxLength, MinimumLength = VehycleInfoMinLength, ErrorMessage = "The field must contain atleast {2} symbols")]
-        public string VehycleInfo { get; set; } = null!;
+        public string VehycleInfo { get; set; } 
 
         [Required]
-        public string Transmition { get; set; } = null!;
+        public string Transmition { get; set; }
 
         [Required]
         [Display(Name = "Horse Power(hp)")]
@@ -56,15 +56,15 @@
 
         [Required]
         [Display(Name = "EU")]
-        public string EuroStrandart { get; set; } = null!;
+        public string EuroStrandart { get; set; } 
 
         [Required]
-        public string Condition { get; set; } = null!;
+        public string Condition { get; set; }
 
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public IEnumerable<VehycleCategoriesViewModel> Categories { get; set; }
-        public List<IFormFile> Photo { get; set; } = null!;
-        public IEnumerable<Photo> Photos { get; set; } = null!;
+        public List<IFormFile> Photo { get; set; } 
+        public IEnumerable<Photo> Photos { get; set; }
 	}
 }
