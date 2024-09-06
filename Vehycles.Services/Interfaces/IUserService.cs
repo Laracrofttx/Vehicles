@@ -5,6 +5,6 @@
 	public interface IUserService
 	{
 		public Task<IdentityResult> RegisterAsync(RegisterViewModel model);
-		public Task LoginAsync(LoginViewModel model);
+		public Task<LoginViewModel> LoginAsync(LoginViewModel model);
 	}
 }

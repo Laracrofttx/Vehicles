@@ -15,11 +15,7 @@
 			this.userManager = userManager;
 			this.signInManager = signInManager;
 		}
-		public Task LoginAsync(LoginViewModel model)
-		{
-			throw new NotImplementedException();
-		}
-
+		
 		public async Task<IdentityResult> RegisterAsync(RegisterViewModel model)
 		{
 			try
@@ -41,8 +37,35 @@
 			}
 			catch (Exception)
 			{
+				return IdentityResult.Failed(new IdentityError
+				{
+					Description =
+					"An error occurred during registration. Please try again later."
+				});
+			}
+		}
+		public async Task<LoginViewModel> LoginAsync(LoginViewModel model)
+		{
+			try
+			{
+				var user = await this.userManager.FindByEmailAsync(model.UserName) ?? throw new ArgumentException("There is no such user.");
+				var result = await this.signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
 
-				throw;
+				if (!result.Succeeded)
+				{
+					throw new ArgumentException("There was a error while loggin you in! Please try again later or contact an administrator.");
+				}
+
+				return new LoginViewModel()
+				{
+					UserName = model.UserName,
+					Password = model.Password,
+					RememberMe = model.RememberMe,
+				};
+			}
+			catch (Exception)
+			{
+				throw new InvalidOperationException("An error occurred during login. Please try again later.");
 			}
 		}
 	}

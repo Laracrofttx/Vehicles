@@ -18,7 +18,7 @@ namespace Vehycles.Web.Controllers
 			return View();
 		}
 
-		[HttpPost]
+		[HttpPost("register")]
 		[AllowAnonymous]
 		public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
 		{
@@ -47,7 +47,24 @@ namespace Vehycles.Web.Controllers
 			{
 				throw new ArgumentException("An error occured while trying to register", ex.Message);
 			}
-		
+		}
+		[HttpPost("login")]
+		[AllowAnonymous]
+		public async Task<IActionResult> Login([FromBody]LoginViewModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest("Something went wrong. Try again later.");
+			}
+			try
+			{
+				var result = await this.userService.LoginAsync(model);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+			return RedirectToAction("Index", "Home");
 		}
 	}
 }
