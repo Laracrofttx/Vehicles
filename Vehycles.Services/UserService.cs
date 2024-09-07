@@ -20,18 +20,28 @@
 		{
 			try
 			{
-				var userExist = userManager.FindByEmailAsync(model.EmailAddress);
+				var userExist = await this.userManager.FindByEmailAsync(model.EmailAddress);
 				if (userExist != null) 
 				{
 					throw new ArgumentException("User with this email already exists.");
 				}
 
-				var user = new ApplicationUser { UserName = model.UserName, Email = model.EmailAddress };
+				var user = new ApplicationUser
+				{
+					UserName = model.UserName,
+					Email = model.EmailAddress,
+					FirstName = model.FirstName,
+					LastName = model.LastName,
+					Gender = model.Gender,
+					PhoneNumber = model.PhoneNumber,
+					DateOfBirth = model.DateOfBirth,
+					Age = model.Age
+				};
 				var result = await userManager.CreateAsync(user, model.Password);
 
 				if (result.Succeeded) 
 				{
-					await this.signInManager.SignInAsync(user, isPersistent: false);
+					await this.signInManager.SignInAsync(user,false);
 				}
 				return result;
 			}
@@ -44,28 +54,30 @@
 				});
 			}
 		}
-		public async Task<LoginViewModel> LoginAsync(LoginViewModel model)
+		public async Task<LoginResponseModel> LoginAsync(LoginRequestModel model)
 		{
 			try
 			{
-				var user = await this.userManager.FindByEmailAsync(model.UserName) ?? throw new ArgumentException("There is no such user.");
-				var result = await this.signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
+				var user = await this.userManager.FindByEmailAsync(model.EmailAddress);
+                if (user == null)
+                {
+					throw new ArgumentException("User with that email doesn't exist.");
+                }
+                var result = await this.signInManager.PasswordSignInAsync(model.EmailAddress, model.Password, model.RememberMe, false);
 
 				if (!result.Succeeded)
 				{
 					throw new ArgumentException("There was a error while loggin you in! Please try again later or contact an administrator.");
 				}
 
-				return new LoginViewModel()
+				return new LoginResponseModel()
 				{
-					UserName = model.UserName,
-					Password = model.Password,
-					RememberMe = model.RememberMe,
+					Email = model.EmailAddress
 				};
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
-				throw new InvalidOperationException("An error occurred during login. Please try again later.");
+				throw new ArgumentException("An error occurred during login. Please try again later.", ex.Message);
 			}
 		}
 	}

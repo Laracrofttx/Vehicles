@@ -2,10 +2,11 @@
 
 namespace Vehycle.Web.ViewModels.Account
 {
-    public class LoginViewModel
+    public class LoginRequestModel
     {
         [Required]
-        public string UserName { get; set; }
+        [Display(Name = "Email")]
+        public string EmailAddress { get; set; } = null!;
         [Required]
         public string Password { get; set; }
         [Required]

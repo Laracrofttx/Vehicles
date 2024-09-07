@@ -1,5 +1,5 @@
 ﻿@using Vehycle.Web.ViewModels.Account
-@model LoginViewModel
+@model LoginRequestModel
 
 @{
 	ViewData["Title"] = "Log in";
@@ -12,9 +12,9 @@
             <form id="login" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating mb-2">
-                    <input asp-for="UserName" class="form-control" autocomplete="username" aria-required="true" />
-                    <label asp-for="UserName" class="form-label"></label>
-                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    <input asp-for="EmailAddress" class="form-control" autocomplete="username" aria-required="true" />
+                    <label asp-for="EmailAddress" class="form-label"></label>
+                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
                 </div>
                 <div class="form-floating mb-2">
                     <input asp-for="Password" class="form-control" autocomplete="current-password" aria-required="true" />
