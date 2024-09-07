@@ -13,12 +13,19 @@ namespace Vehycles.Web.Controllers
 		{
 			this.userService = userService;
 		}
-		public IActionResult Index()
+		[HttpGet]
+		public IActionResult Register()
 		{
 			return View();
 		}
 
-		[HttpPost("register")]
+		[HttpGet]
+		public IActionResult Login()
+		{
+			return View();
+		}
+
+		[HttpPost]
 		[AllowAnonymous]
 		public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
 		{
@@ -48,7 +55,7 @@ namespace Vehycles.Web.Controllers
 				throw new ArgumentException("An error occured while trying to register", ex.Message);
 			}
 		}
-		[HttpPost("login")]
+		[HttpPost]
 		[AllowAnonymous]
 		public async Task<IActionResult> Login([FromBody]LoginViewModel model)
 		{
