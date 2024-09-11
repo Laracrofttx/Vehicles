@@ -4,7 +4,8 @@
 	using Vehycle.Web.ViewModels.Account;
 	public interface IUserService
 	{
-		 Task<IdentityResult> RegisterAsync(RegisterViewModel model);
-		 Task<LoginResponseModel> LoginAsync(LoginRequestModel model);
+		Task<IdentityResult> RegisterAsync(RegisterViewModel model);
+		Task<LoginRequestModel> LoginAsync(LoginRequestModel model);
+		Task LogoutAsync();
 	}
 }

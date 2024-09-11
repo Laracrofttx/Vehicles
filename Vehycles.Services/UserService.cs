@@ -54,31 +54,32 @@
 				});
 			}
 		}
-		public async Task<LoginResponseModel> LoginAsync(LoginRequestModel model)
+		public async Task<LoginRequestModel> LoginAsync(LoginRequestModel model)
 		{
 			try
 			{
-				var user = await this.userManager.FindByEmailAsync(model.EmailAddress);
-                if (user == null)
-                {
-					throw new ArgumentException("User with that email doesn't exist.");
-                }
-                var result = await this.signInManager.PasswordSignInAsync(model.EmailAddress, model.Password, model.RememberMe, false);
+                //var user = await userManager.FindByEmailAsync(model.UserName) ?? throw new ArgumentException("There is no such user.");
+				var result = await this.signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
 
 				if (!result.Succeeded)
 				{
 					throw new ArgumentException("There was a error while loggin you in! Please try again later or contact an administrator.");
 				}
 
-				return new LoginResponseModel()
+				return new LoginRequestModel()
 				{
-					Email = model.EmailAddress
+					UserName = model.UserName
 				};
 			}
 			catch (Exception ex)
 			{
 				throw new ArgumentException("An error occurred during login. Please try again later.", ex.Message);
 			}
+		}
+
+		public async Task LogoutAsync()
+		{
+			await this.signInManager.SignOutAsync();
 		}
 	}
 }
