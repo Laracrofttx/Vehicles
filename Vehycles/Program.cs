@@ -46,6 +46,7 @@ namespace Vehycles
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IAdService, AdService>();
 
+            builder.Services.AddMemoryCache();
             builder.Services.AddResponseCaching();
             builder.Services.ConfigureApplicationCookie(cfg =>
             {

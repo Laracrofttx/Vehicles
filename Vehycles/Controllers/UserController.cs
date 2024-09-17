@@ -1,6 +1,7 @@
 ﻿namespace Vehycles.Web.Controllers
 {
 	using Microsoft.AspNetCore.Authentication;
+	using Microsoft.AspNetCore.Authentication.Cookies;
 	using Microsoft.AspNetCore.Authorization;
 	using Microsoft.AspNetCore.Identity;
 	using Microsoft.AspNetCore.Mvc;
@@ -35,7 +36,6 @@
 
 
 		[HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
@@ -65,7 +65,6 @@
             }
         }
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginRequestModel model)
         {
             if (!ModelState.IsValid) { return BadRequest("Something went wrong. Try again later."); }
@@ -83,7 +82,7 @@
 
         [HttpPost]
         public async Task<IActionResult> Logout()
-        { 
+        {
             await this.userService.LogoutAsync();
             return RedirectToAction("Index", "Home");
         }
